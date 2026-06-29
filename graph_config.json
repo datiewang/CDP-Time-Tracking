@@ -46,5 +46,6 @@
     "LOYALTY",
     "INTEGRATION",
     "TABLECHECK"
-  ]
+  ],
+  "name_suffix": "/ONHM"
 }

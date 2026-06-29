@@ -194,6 +194,7 @@ def main():
     target_emails = config.get("target_emails", [])
     config_keywords = config.get("keywords", KEYWORDS)
     keywords_upper = [kw.upper() for kw in config_keywords]
+    name_suffix = config.get("name_suffix", "/ONHM").upper()
     
     # We define the window filter parameters
     window_start = datetime.fromisoformat(start_date.replace("Z", "+00:00")).replace(tzinfo=None)
@@ -281,7 +282,7 @@ def main():
         participants = set()
         for n in names:
             n_str = str(n).strip()
-            if n_str.upper().endswith("/ONHM"):
+            if n_str.upper().endswith(name_suffix):
                 participants.add(n_str)
                 
         if not participants:
