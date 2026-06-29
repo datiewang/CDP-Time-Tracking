@@ -11,8 +11,8 @@
 ├── fill_template_from_output.py   # Excel 入力ロジック（集計結果を template.xlsx に反映）
 ├── export_all_person_md.py        # 個人用レポート出力ロジック（Markdown テーブルの生成）
 ├── template.xlsx                  # 入力用 Excel テンプレート（既存フォーマットと数式を維持）
-├── graph_config.example.json      # 設定ファイルのテンプレート（コピーして graph_config.json に変更）
-├── azure_registration_guide.md    # Microsoft Entra ID アプリケーション登録手順書
+├── graph_config.json              # アプリケーション設定ファイル（認証情報や対象アドレスが設定済み）
+├── azure_registration_guide.md    # Microsoft Entra ID アプリケーション登録手順書（参照用）
 └── README.md                      # 本ドキュメント（本ファイル）
 ```
 
@@ -30,30 +30,11 @@
 
 ## 🚀 クイックスタート
 
-### ステップ 1: Azure でのアプリ登録
-**[azure_registration_guide.md](azure_registration_guide.md)** の手順に従って、Microsoft Azure ポータルでアプリケーションの登録を行い、以下を取得してください：
-1. アプリケーション（クライアント）ID (`client_id`)
-2. ディレクトリ（テナント）ID (`tenant_id`)
+### ステップ 1: 設定ファイルの確認
+本リポジトリには、社内共通の逆引き認証情報（`client_id` および `tenant_id`）と対象メールアドレスリストが設定済みの **`graph_config.json`** があらかじめ含まれています。
+通常は設定を修正することなく、そのまま実行可能です。集計対象期間を変更したい場合は、ファイル内の `"start_date"` および `"end_date"` の日付を修正してください。
 
-### ステップ 2: 設定ファイルの作成と修正
-1. 開発ディレクトリの `graph_config.example.json` をコピーし、**`graph_config.json`** にリネームします。
-2. ファイルを開き、ステップ 1 で取得した認証情報を入力します：
-   ```json
-   {
-     "client_id": "取得したクライアントID",
-     "tenant_id": "取得したテナントID",
-     "start_date": "2025-09-01T00:00:00Z",
-     "end_date": "2026-04-01T00:00:00Z",
-     "target_emails": [
-       "Ryutaro.SUZUKI@okura-nikko.co.jp",
-       "..."
-     ],
-     "timezone": "Tokyo Standard Time",
-     "auth_flow": "interactive"
-   }
-   ```
-
-### ステップ 3: 集計スクリプトの実行
+### ステップ 2: 集計スクリプトの実行
 コンソールでメインスクリプトを実行します：
 ```bash
 python run_graph_pipeline.py
