@@ -32,9 +32,9 @@
 本リポジトリには、社内共通の認証情報（`client_id` および `tenant_id`）、対象メールアドレスリスト、検索キーワード、および対象ユーザー判定用の末尾文字（`"name_suffix": "/ONHM"`）が設定済みの **`graph_config.json`** があらかじめ含まれています。
 
 **【重要】セキュリティ保護のため、クライアント シークレット（パスワード）はリポジトリにアップロードされていません。** 
-[azure_registration_guide.md](azure_registration_guide.md) の手順に従って Azure Portal でクライアント シークレットを生成し、`graph_config.json` の `"client_secret"` の項目に**手動で入力**してください。
+[azure_registration_guide.md](azure_registration_guide.md) の手順に従って Azure Portal でクライアント シークレットを**取得**し、`graph_config.json` の `"client_secret"` の項目に**手動で入力**してください。
 
-必要に応じて、集計対象期間 (`"start_date"`, `"end_date"`)、検索キーワード (`"keywords"`)、対象ユーザーの判定末尾文字 (`"name_suffix"`) などの項目を自由に修正可能です。
+必要に応じて、集計対象期間 (`"start_date"`, `"end_date"`)、集計対象メールアドレス (`"target_emails"`)、検索キーワード (`"keywords"`)、対象ユーザーの判定末尾文字 (`"name_suffix"`) などの項目を自由に修正可能です。
 
 ### ステップ 2: 集計スクリプトの実行
 コンソールでメインスクリプトを実行します：
