@@ -66,6 +66,12 @@ Microsoft Graph API を使用して Outlook の予定表データを取得する
 5. 作成完了後、一覧に表示される **値 (Value)** （※「シークレット ID」ではありません）を**すぐにコピーして手元に控えてください**。
    * ※ 注意: この「値」はページを離れたり更新したりすると二度と表示されなくなります。
 
+> [!IMPORTANT]
+> **シークレットの有効期限とアプリ管理直通リンクについて**
+> セキュリティ上の仕様により、クライアント シークレットには有効期限（最長 2 年）があります。期限が切れると認証エラーが発生します。
+> 期限が切れた場合や、登録済みアプリの管理・新規シークレットの再発行を行いたい場合は、以下の直通リンクから Azure ポータルの管理画面に直接アクセスできます：
+> [CDP Time Tracking 登録アプリ管理ページ (Azure Portal)](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/8b54a005-e2c7-45a8-be9d-43a69ee567a2/objectId/766c73d8-923f-4ab1-8f8e-58ee57c4e176/isMSAApp~/false/defaultBlade/Overview/appSignInAudience/AzureADMyOrg/servicePrincipalCreated~/true)
+
 ---
 
 ## ステップ 6: 設定ファイルへの適用とカスタマイズ
