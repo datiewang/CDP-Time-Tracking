@@ -34,6 +34,7 @@ def save_cache(cache):
 def get_access_token(config):
     client_id = config.get("client_id")
     tenant_id = config.get("tenant_id", "common")
+    client_secret = config.get("client_secret")
     auth_flow = config.get("auth_flow", "interactive").lower()
     
     if not client_id or "ENTER_YOUR_CLIENT_ID" in client_id:
@@ -43,6 +44,30 @@ def get_access_token(config):
         )
 
     authority = f"https://login.microsoftonline.com/{tenant_id}"
+    
+    # 1. Option B: Client Credentials flow (Application permissions)
+    if auth_flow == "client_credentials":
+        if not client_secret or "ENTER_YOUR_CLIENT_SECRET" in client_secret:
+            raise ValueError(
+                "Error: 'client_secret' is required for client_credentials flow.\n"
+                "Please configure a valid 'client_secret' in 'graph_config.json'."
+            )
+        print("Using Client Credentials authentication (Option B)...")
+        app = msal.ConfidentialClientApplication(
+            client_id=client_id,
+            client_credential=client_secret,
+            authority=authority
+        )
+        # Use .default scope for client credentials flow
+        result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
+        if result and "access_token" in result:
+            print("Client Credentials authentication successful.")
+            return result["access_token"]
+        else:
+            error_msg = result.get("error_description") if result else "Unknown authentication error"
+            raise RuntimeError(f"Client Credentials authentication failed: {error_msg}")
+
+    # 2. Option A: Public Client flows (Delegated permissions - interactive / device_code)
     cache = load_cache()
     
     app = msal.PublicClientApplication(
