@@ -21,7 +21,9 @@
 
 セキュリティおよび情報漏洩防止のため、認証用の **クライアント シークレット (Client Secret) は Git サーバーにアップロードされていません**。
 
-新しくリポジトリをクローンまたは解圧して利用する際は、管理者から取得したシークレット、もしくは自身で再発行したシークレットの **「値 (Value)」** を、ローカル環境の **`graph_config.json`** に手動で追記する必要があります。
+新しくリポジトリをクローンまたは解圧して利用する際は、以下のアプリ管理ページ（Azure Portal）からシークレットを取得（または再生成）し、その **「値 (Value)」** をローカル環境の **`graph_config.json`** に手動で追記する必要があります。
+
+* 👉 [CDP Time Tracking 登録アプリ管理ページ (Azure Portal)](https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/Overview/appId/8b54a005-e2c7-45a8-be9d-43a69ee567a2/objectId/766c73d8-923f-4ab1-8f8e-58ee57c4e176/isMSAApp~/false/defaultBlade/Overview/appSignInAudience/AzureADMyOrg/servicePrincipalCreated~/true)
 
 ```json
 {
