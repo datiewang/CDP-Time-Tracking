@@ -1,6 +1,6 @@
 # Microsoft Entra ID (Azure AD) アプリケーション登録手順書
 
-Microsoft Graph API を使用して Outlook の予定表データを取得するために、Microsoft Azure ポータルでアプリケーションの登録を行う必要があります。登録が完了すると、`client_id` (アプリケーション ID) と `tenant_id` (ディレクトリ ID) が取得できます。
+Microsoft Graph API を使用して Outlook の予定表データを取得するために、Microsoft Azure ポータルでアプリケーションの登録を行う必要があります。登録が完了すると、`client_id` (アプリケーション ID)、`tenant_id` (ディレクトリ ID)、およびアプリ認証用の `client_secret` (クライアント シークレット) が取得できます。
 
 以下に詳細な登録手順を説明します。
 
@@ -68,9 +68,9 @@ Microsoft Graph API を使用して Outlook の予定表データを取得する
 
 ---
 
-## ステップ 6: 設定ファイルへの適用
+## ステップ 6: 設定ファイルへの適用とカスタマイズ
 
-取得した値を **[graph_config.json](graph_config.json)** に以下のように設定してください：
+取得した資格情報およびその他の設定を **[graph_config.json](graph_config.json)** に適用します。
 
 ```json
 {
@@ -78,6 +78,22 @@ Microsoft Graph API を使用して Outlook の予定表データを取得する
   "tenant_id": "取得したディレクトリ (テナント) ID",
   "client_secret": "取得したクライアント シークレットの「値」",
   "auth_flow": "client_credentials",
-  ...
+  "start_date": "2025-09-01T00:00:00Z",
+  "end_date": "2026-04-01T00:00:00Z",
+  "target_emails": [
+    "Ryutaro.SUZUKI@okura-nikko.co.jp",
+    "Mitsumasa.TSUTSUMI@okura-nikko.co.jp",
+    "..."
+  ],
+  "timezone": "Tokyo Standard Time",
+  "keywords": ["CDP", "IRU", "AZDS", "SHIJI", "QUALTRICS", "LOYALTY", "INTEGRATION", "TABLECHECK"],
+  "name_suffix": "/ONHM"
 }
 ```
+
+### 各設定項目の説明とカスタマイズ方法
+* **`client_secret` (手動入力が必要)**：ステップ 5 で取得したクライアント シークレットの「値 (Value)」をここに入力します。
+* **`target_emails` (カスタマイズ可能)**：カレンダーデータを取得したい集計対象ユーザーのメールアドレスリストです。必要に応じて自由に追加・変更してください。
+* **`start_date` / `end_date` (カスタマイズ可能)**：集計対象の期間範囲です（ISO 8601 形式）。
+* **`keywords` (カスタマイズ可能)**：CDP関連の会議を抽出するための検索キーワードリストです。
+* **`name_suffix` (カスタマイズ可能)**：集計対象となる社内メンバーの表示名の判定尾綴（デフォルトは `"/ONHM"`）です。
