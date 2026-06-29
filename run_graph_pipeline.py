@@ -167,6 +167,8 @@ def main():
     end_date = config.get("end_date", "2025-10-01T00:00:00Z")
     timezone = config.get("timezone", "Tokyo Standard Time")
     target_emails = config.get("target_emails", [])
+    config_keywords = config.get("keywords", KEYWORDS)
+    keywords_upper = [kw.upper() for kw in config_keywords]
     
     # We define the window filter parameters
     window_start = datetime.fromisoformat(start_date.replace("Z", "+00:00")).replace(tzinfo=None)
@@ -227,7 +229,7 @@ def main():
             
         # Keyword filter (CDP-related)
         full_text_upper = full_text.upper()
-        if not any(kw in full_text_upper for kw in KEYWORDS):
+        if not any(kw in full_text_upper for kw in keywords_upper):
             continue
             
         # Names extraction (Organizer + Attendees)

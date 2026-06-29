@@ -33,5 +33,15 @@
     "Toshiyuki.KOBAYASHI@okura-nikko.co.jp"
   ],
   "timezone": "Tokyo Standard Time",
-  "auth_flow": "interactive"
+  "auth_flow": "interactive",
+  "keywords": [
+    "CDP",
+    "IRU",
+    "AZDS",
+    "SHIJI",
+    "QUALTRICS",
+    "LOYALTY",
+    "INTEGRATION",
+    "TABLECHECK"
+  ]
 }
