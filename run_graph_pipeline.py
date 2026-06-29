@@ -8,13 +8,6 @@ from collections import defaultdict
 import requests
 import msal
 
-# Import Excel template filler from existing script
-try:
-    from fill_template_from_output import load_hours_by_person_month, fill_template
-except ImportError:
-    load_hours_by_person_month = None
-    fill_template = None
-
 # MSAL Configuration
 TOKEN_CACHE_FILE = "token_cache.bin"
 SCOPES = ["Calendars.Read", "Calendars.Read.Shared", "User.Read"]
@@ -338,20 +331,7 @@ def main():
     except Exception as e:
         print(f"Failed to generate Markdown reports: {e}")
         
-    # 5) Excel Auto-filling
-    if load_hours_by_person_month and fill_template:
-        template_path = os.path.join(base_dir, "template.xlsx")
-        if os.path.exists(template_path):
-            try:
-                data = load_hours_by_person_month(summary_path)
-                filled_path = fill_template(template_path, output_dir, data)
-                print(f"Successfully filled Excel template: {filled_path}")
-            except Exception as e:
-                print(f"Failed to fill Excel template: {e}")
-        else:
-            print(f"Excel template not found at {template_path}, skipping fill.")
-    else:
-        print("Excel filling functions not available.")
+    # Excel output removed by user request
 
 if __name__ == "__main__":
     main()
